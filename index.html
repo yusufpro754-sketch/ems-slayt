@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Medikal - Yeni Nesil EMS Teknolojisi</title>
+    <style>
+        /* --- GENEL AYARLAR VE TİPOGRAFİ (MEVCUT YAPI KORUNDU) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Soft gri-mavi medikal tonlar */
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a3c5e; /* Koyu Lacivert */
+        }
+
+        /* --- LOGO --- */
+        .logo-container {
+            position: fixed;
+            top: 30px;
+            left: 40px;
+            z-index: 1000;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .logo-container img {
+            height: 320px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- SLAYT / SAYFA YAPISI --- */
+        .slide-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 5% 40px; 
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            page-break-after: always; 
+        }
+
+        /* --- İÇERİK KARTI TASARIMI --- */
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 2rem;
+            border-left: 5px solid #007bff; 
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px); 
+        }
+
+        .content-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            color: #0056b3;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Detay Listeleri */
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .feature-list li::before {
+            content: '✔'; 
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* --- GÖRSEL ALANI --- */
+        .visual-area {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .visual-area img {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #fff;
+            padding: 10px; 
+        }
+
+        /* İlk görseli veya tam sayfa görselleri büyütmek için özel sınıf */
+        .visual-area.large-intro img {
+            max-height: 65vh; 
+            width: 100%;
+        }
+
+        /* Yan yana görseller için grid yapısı */
+        .comparison-area {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .comparison-area img {
+            width: calc(50% - 10px);
+            height: auto;
+            max-height: 45vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
+        
+        /* --- TEKNİK LİSTE BÖLÜMÜ --- */
+        .technical-section .content-card {
+            border-left-color: #dc3545; 
+        }
+        
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #c0392b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tech-box ul li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            border-left: 3px solid #e2e6ea;
+            list-style: none; /* Liste işaretini kaldırdık, border kullanıyoruz */
+        }
+
+        /* --- SON SAYFA: İLETİŞİM --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Video yerine görsel kullanacağımız için wrapper'ı koruyoruz */
+        .video-wrapper {
+            background: #fff; /* Arka planı beyaz yaptık */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            /* padding-top: 56.25%; Video oranı yerine içeriğe göre esnesin diye bunu kaldırabiliriz veya görsel için koruyabiliriz */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .contact-info-box h3 {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .info-item strong {
+            color: #0056b3;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin-top: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .qr-container img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .qr-container p {
+            font-weight: bold;
+            color: #E1306C; /* Instagram Pembesi Rengi */
+            margin: 5px 0;
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+
+        /* Print ve Mobil Ayarlar */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0; 
+            }
+            body, html {
+                background: #fff;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact; 
+            }
+            .logo-container {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+            .logo-container img {
+                height: 80px !important;
+            }
+            .slide-section {
+                height: 100vh; 
+                page-break-after: always !important; 
+                break-after: page !important;
+                page-break-inside: avoid !important; 
+                padding: 40px 20px !important; 
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; 
+                border: none;
+            }
+            .content-card {
+                box-shadow: none; 
+                border: 1px solid #ddd;
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .visual-area img, .comparison-area img {
+                max-height: 35vh; 
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img { height: 80px; }
+            .content-card { padding: 1.5rem; }
+            .feature-list { grid-template-columns: 1fr; }
+            .content-card h2 { font-size: 1.5rem; }
+            .comparison-area { flex-direction: column; }
+            .comparison-area img { width: 100%; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="logo.jpg" alt="Focus Medikal Logo">
+    </div>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Yeni Nesil EMS Teknolojisi</h2>
+            <p>
+                Kas çalıştırma ve vücut şekillendirmede devrim yaratan yeni nesil teknoloji ile tanışın.
+            </p>
+            <ul class="feature-list">
+                <li>Yağ yakımı ve kas şekillendirme bir arada.</li>
+                <li>Ameliyatsız ve ağrısız uygulama.</li>
+                <li>Kısa sürede yüksek performans.</li>
+                <li>Focus Medikal güvencesiyle.</li>
+            </ul>
+        </div>
+        <div class="visual-area large-intro"> 
+            <img src="8.jpg" alt="EMS Cihazı">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>EMS Nedir ve Nasıl Çalışır?</h2>
+            <p>
+                Elektriksel Kas Uyarımı (EMS), sinir-kas iletişimini taklit ederek kasların doğal egzersizden çok daha yoğun çalışmasını sağlar.
+            </p>
+            <ul class="feature-list">
+                <li>Sinir-kas iletişimini birebir taklit eder.</li>
+                <li>Kaslar ritmik olarak kasılır ve gevşer.</li>
+                <li>Derin kas gruplarını harekete geçirir.</li>
+                <li>Kas gücü ve sıkılığını maksimum seviyeye çıkarır.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="5.jpg" alt="EMS Çalışma Prensibi">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>30 Dakikada 25.000 Mekik Etkisi</h2>
+            <p>
+                Normal spor egzersizleriyle ulaşılması zor olan kasılma sayılarına sadece 30 dakikalık bir seansta ulaşır.
+            </p>
+            <ul class="feature-list">
+                <li>Sadece 30 dakikada 25.000 mekik/squat etkisi.</li>
+                <li>Kısa sürede yoğun ve derin kas çalışması.</li>
+                <li>Normal egzersizin çok üzerinde etki.</li>
+                <li>Zaman kazandırır, eforu minimize eder.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="4.jpg" alt="Fitness Etkisi">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>EMS + RF Teknolojisi ve Uygulama Alanları</h2>
+            <p>
+                İki teknolojiyi (EMS ve Radyofrekans) birleştirerek hem kasları şekillendirir hem de sıkılaşma sağlar.
+            </p>
+            <ul class="feature-list">
+                <li><strong>Karın:</strong> Kasları belirginleştirir, yağları eritir.</li>
+                <li><strong>Basen:</strong> Kaldırma (lift) etkisi yaratır.</li>
+                <li><strong>Bacak ve Kol:</strong> Sıkılaşma ve incelme sağlar.</li>
+                <li><strong>Bel:</strong> İncelme ve form kazandırır.</li>
+            </ul>
+        </div>
+        <div class="comparison-area">
+            <img src="6.jpg" alt="Karın Uygulaması">
+            <img src="7.jpg" alt="Basen Uygulaması">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Konforlu ve Ağrısız Uygulama</h2>
+            <p>
+                Sosyal hayatınızı etkilemeden, öğle arasında bile yaptırabileceğiniz konforlu bir işlemdir.
+            </p>
+            <ul class="feature-list">
+                <li>Tamamen ağrısızdır, anestezi gerektirmez.</li>
+                <li>İğnesiz ve ameliyatsızdır.</li>
+                <li>Enerji seviyesi kişiye göre ayarlanabilir.</li>
+                <li>İşlem sonrası günlük hayata hemen dönüş.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="2.jpg" alt="Klinik Uygulama">
+        </div>
+    </section>
+
+    <section class="slide-section technical-section">
+        <div class="content-card">
+            <h2>Teknik Kapasite ve Kullanım</h2>
+            <p>
+                Yüksek performanslı donanımı ile profesyonel merkezler için tasarlanmıştır.
+            </p>
+            
+            <div class="technical-grid">
+                <div class="tech-box">
+                    <h3>⚡ Cihaz Gücü</h3>
+                    <ul>
+                        <li><strong>13 Tesla:</strong> Güçlü derin kas uyarımı.</li>
+                        <li><strong>3500 Watt:</strong> Dengeli ve stabil enerji çıkışı.</li>
+                        <li>Kesintisiz performans ve dayanıklılık.</li>
+                    </ul>
+                </div>
+
+                <div class="tech-box">
+                    <h3>👥 Kimler İçin Uygun?</h3>
+                    <ul>
+                        <li>Bölgesel yağlanma sorunu olanlar.</li>
+                        <li>Kas gücü zayıf kişiler.</li>
+                        <li>Sıkılaşma ve vücut şekillendirme isteyenler.</li>
+                        <li>Spor yapmaya vakti olmayanlar.</li>
+                    </ul>
+                </div>
+
+                 <div class="tech-box">
+                    <h3>🏥 Profesyonel Standart</h3>
+                    <ul>
+                        <li>Güzellik merkezleri ve klinikler için ideal.</li>
+                        <li>Güvenli kullanım protokolleri.</li>
+                        <li>Müşteri memnuniyeti odaklı sonuçlar.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="visual-area large-intro">
+            <img src="9.jpg" alt="Yeni Nesil EMS Özeti">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card contact-section">
+            <h2>İletişim</h2>
+            <p>
+                Cihaz hakkında detaylı bilgi, demo talebi ve sipariş için bize ulaşın.
+            </p>
+            
+            <div class="contact-grid">
+                
+                <div class="video-wrapper">
+                    <img src="1.jpg" alt="Focus Medikal EMS">
+                </div>
+
+                <div class="contact-info-box">
+                    <h3>Bize Ulaşın</h3>
+                    
+                    <div class="info-item">
+                        <strong>Focus Medikal</strong><br>
+                        Gaziantep / Şehitkamil 
+                    </div>
+                    
+                    <div class="info-item" style="margin-top: 10px; font-weight: bold; color: #333;">
+                         NURHAYAT ÇAYIRGAN
+                    </div>
+
+                    <div class="info-item">
+                        <strong>Telefon:</strong><br>
+                        +90 552 605 48 55
+                    </div>
+
+                    <div class="qr-container">
+                        <img src="instagram_qr.jpg" alt="Instagram QR Kodu">
+                        <p>@focusmedikal</p>
+                        <p>Bizi takip etmeyi unutmayınız</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-note">
+            © 2026 Focus Medikal - Tüm Hakları Saklıdır.
+        </div>
+    </section>
+
+</body>
+</html>
