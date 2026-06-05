@@ -12,11 +12,10 @@
     
     body {
       font-family: 'Open Sans', sans-serif;
-      /* Ferah, lüks ve buz mavisi/beyaz geçişli medikal arka plan */
       background: radial-gradient(circle at 50% 50%, #f4f7f9 0%, #d9e2ec 100%);
       color: #333;
       line-height: 1.7;
-      overflow: hidden; /* Slayt mantığı için SCROLL (KAYDIRMA) İPTAL EDİLDİ */
+      overflow: hidden; 
     }
 
     h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
@@ -30,7 +29,7 @@
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
     }
     .logo-container img { 
-      height: 160px; /* Büyük ve belirgin logo */
+      height: 160px; 
       width: auto; 
     }
 
@@ -52,7 +51,6 @@
       align-items: center;
       padding: 0 5%;
       
-      /* Animasyon Ayarları */
       opacity: 0;
       visibility: hidden;
       transform: scale(0.98);
@@ -67,9 +65,8 @@
       z-index: 10;
     }
 
-    /* İÇERİK KONTEYNERİ (Yanyana dizilim) */
     .slide-container {
-      max-width: 1300px;
+      max-width: 1350px;
       width: 100%;
       display: flex;
       flex-direction: row;
@@ -78,7 +75,7 @@
       gap: 50px;
     }
 
-    /* --- İÇERİK KARTI (GLASSMORPHISM & MAVİ KONSEPT) --- */
+    /* --- İÇERİK KARTI --- */
     .content-card {
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px); 
@@ -87,7 +84,7 @@
       border-radius: 24px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); 
       border: 1px solid rgba(255, 255, 255, 0.8);
-      border-top: 5px solid #007bff; /* ANA MAVİ RENK BURADA */
+      border-top: 5px solid #007bff; 
       flex: 1; 
       max-width: 600px;
     }
@@ -95,7 +92,6 @@
     .content-card h2 {
       font-size: 2.4rem;
       margin-bottom: 1.2rem;
-      /* Başlıklarda Koyu Lacivertten -> Focus Mavisine Geçiş */
       background: linear-gradient(90deg, #1a3c5e, #007bff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -109,7 +105,6 @@
       text-align: justify;
     }
 
-    /* Detay Listeleri */
     .feature-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
     .feature-list li {
       list-style: none;
@@ -119,40 +114,78 @@
       color: #374151;
       font-weight: 500;
     }
-    
-    /* Mavi Yuvarlaklı Estetik Tik İşareti */
     .feature-list li::before {
       content: '✓'; 
       position: absolute; left: 0; top: -2px; display: flex; align-items: center; justify-content: center;
-      width: 24px; height: 24px; 
-      background: rgba(0, 123, 255, 0.15); /* Açık mavi arka plan */
-      color: #007bff; /* Canlı mavi tik */
-      border-radius: 50%; font-weight: bold;
+      width: 24px; height: 24px; background: rgba(0, 123, 255, 0.15); color: #007bff; border-radius: 50%; font-weight: bold;
     }
 
-    /* --- GÖRSEL ALANI --- */
-    .visual-area { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+    /* --- GÖRSEL ALANI (KESİLME/TAŞMA SORUNU ÇÖZÜLDÜ) --- */
+    .visual-area { 
+      flex: 1; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      position: relative; 
+      height: 100%;
+    }
+    
     .visual-area img {
-      width: 100%; max-width: 600px; height: auto; max-height: 70vh;
-      border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); object-fit: cover;
+      width: 100%; 
+      max-width: 600px; 
+      height: 100%;
+      max-height: 65vh; /* Ekrana sığması için kısıtlama */
+      border-radius: 20px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+      object-fit: contain; /* COVER YERİNE CONTAIN: Resmi kesinlikle kırpmaz, içine sığdırır */
+      background: #ffffff; /* Sığdırırken arkada kalan boşlukları beyaz yapar */
+      padding: 20px; /* Cihazın çerçeveye yapışmasını engeller */
     }
-    .visual-area.large-intro img { max-width: 800px; }
+    
+    .visual-area.large-intro img { max-width: 800px; max-height: 75vh; }
 
-    .comparison-area { display: flex; gap: 20px; width: 100%; justify-content: center; }
-    .comparison-area img { width: 48%; border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); object-fit: cover; }
+    .comparison-area { display: flex; gap: 20px; width: 100%; justify-content: center; align-items: center; }
+    .comparison-area img { 
+      width: 48%; 
+      height: 40vh; /* İki resim yan yanayken aynı boyda olsun */
+      border-radius: 16px; 
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+      object-fit: contain; 
+      background: #ffffff;
+      padding: 15px;
+    }
 
-    /* --- TEKNİK VE İLETİŞİM BÖLÜMÜ --- */
+    /* --- TEKNİK BÖLÜM --- */
     .technical-section .slide-container { flex-direction: column; }
-    .technical-section .content-card { max-width: 1000px; border-top-color: #dc3545; } /* Uyarı kırmızısı */
+    .technical-section .content-card { max-width: 1000px; border-top-color: #dc3545; } 
     .technical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 20px; }
     .tech-box h3 { font-size: 1.4rem; margin-bottom: 15px; color: #dc3545; }
-    .tech-box.positive h3 { color: #007bff; } /* Mavi Olumlu Başlık */
+    .tech-box.positive h3 { color: #007bff; } 
     .tech-box ul li { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: #4b5563; list-style:none; }
 
+    /* --- İLETİŞİM BÖLÜMÜ (SON SAYFA DİKEY RESİM AYARI) --- */
     .contact-section .content-card { max-width: 1100px; }
     .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
-    .video-wrapper { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; align-items: center;}
-    .video-wrapper img { width: 100%; display: block; }
+    
+    .video-wrapper { 
+      background: #fff; 
+      border-radius: 20px; 
+      overflow: hidden; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      max-height: 70vh; /* İletişim sayfasının boyunu uzatıp ekran dışına taşırmasını engeller */
+    }
+    
+    .video-wrapper img { 
+      width: 100%; 
+      height: 100%;
+      max-height: 70vh;
+      object-fit: contain; /* Uzun dik resimleri kırpmaz */
+      display: block; 
+      padding: 15px;
+    }
     
     .contact-info-box h3 { font-size: 1.8rem; color: #1a3c5e; margin-bottom: 25px; }
     .info-item { margin-bottom: 20px; font-size: 1.2rem; color: #374151; background: rgba(255,255,255,0.7); padding: 15px; border-radius: 12px; border: 1px solid #eee;}
@@ -168,7 +201,7 @@
       position: fixed;
       bottom: 25px;
       right: 30px;
-      background: #007bff; /* Mavi Slayt Göstergesi */
+      background: #007bff; 
       color: white;
       padding: 10px 18px;
       border-radius: 30px;
@@ -206,7 +239,7 @@
       </div>
     </section>
 
-    <!-- SLAYT 2 (Z-Pattern: Resim Solda, Yazı Sağda) -->
+    <!-- SLAYT 2 -->
     <section class="slide-section">
       <div class="slide-container">
         <div class="visual-area">
@@ -279,7 +312,7 @@
       </div>
     </section>
 
-    <!-- SLAYT 6 (Teknik Bölüm) -->
+    <!-- SLAYT 6 -->
     <section class="slide-section technical-section">
       <div class="slide-container">
         <div class="content-card">
@@ -317,7 +350,7 @@
       </div>
     </section>
 
-    <!-- SLAYT 7 (Büyük Cihaz Görseli) -->
+    <!-- SLAYT 7 -->
     <section class="slide-section">
       <div class="slide-container" style="justify-content: center;">
         <div class="visual-area large-intro">
@@ -326,7 +359,7 @@
       </div>
     </section>
 
-    <!-- SLAYT 8 (İletişim) -->
+    <!-- SLAYT 8 -->
     <section class="slide-section contact-section">
       <div class="slide-container">
         <div class="content-card">
@@ -371,7 +404,6 @@
 
   <div class="slide-indicator" id="slideIndicator">1 / 8</div>
 
-  <!-- JAVASCRIPT: KUMANDA VE KLAVYE GEÇİŞLERİ -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const slides = document.querySelectorAll(".slide-section");
@@ -390,7 +422,6 @@
         indicator.innerText = (currentSlide + 1) + " / " + slides.length;
       }
 
-      // KUMANDA VE KLAVYE
       document.addEventListener("keydown", function(event) {
         if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
           event.preventDefault(); 
@@ -402,7 +433,6 @@
         }
       });
 
-      // FARE EKRAN TIKLAMASI (Sağ tıkla ileri, Sol tıkla geri)
       document.addEventListener("click", function(event) {
         const clickX = event.clientX;
         const screenWidth = window.innerWidth;
@@ -413,7 +443,6 @@
           showSlide(currentSlide - 1); 
         }
       });
-
     });
   </script>
 
