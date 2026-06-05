@@ -15,475 +15,7 @@
       background: radial-gradient(circle at 50% 50%, #f4f7f9 0%, #d9e2ec 100%);
       color: #333;
       line-height: 1.7;
-      overflow: hidden; 
-    }
-
-    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
-
-    /* --- LOGO --- */
-    .logo-container {
-      position: fixed;
-      top: 30px;
-      left: 40px;
-      z-index: 9999; 
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
-    }
-    .logo-container img { 
-      height: 160px; 
-      width: auto; 
-    }
-
-    /* --- SLAYT YAPISI (TAM EKRAN) --- */
-    #presentation-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .slide-section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 5%;
-      
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(0.98);
-      transition: opacity 0.6s ease-in-out, transform 0.6s ease-out, visibility 0.6s;
-      z-index: 1;
-    }
-
-    .slide-section.active {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-      z-index: 10;
-    }
-
-    .slide-container {
-      max-width: 1350px;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 50px;
-    }
-
-    /* --- İÇERİK KARTI --- */
-    .content-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px);
-      padding: 3rem;
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); 
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-top: 5px solid #007bff; 
-      flex: 1; 
-      max-width: 600px;
-    }
-
-    .content-card h2 {
-      font-size: 2.4rem;
-      margin-bottom: 1.2rem;
-      background: linear-gradient(90deg, #1a3c5e, #007bff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
-
-    .content-card p {
-      font-size: 1.15rem;
-      margin-bottom: 1.5rem;
-      color: #4b5563;
-      text-align: justify;
-    }
-
-    .feature-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-    .feature-list li {
-      list-style: none;
-      position: relative;
-      padding-left: 35px;
-      font-size: 1.05rem;
-      color: #374151;
-      font-weight: 500;
-    }
-    .feature-list li::before {
-      content: '✓'; 
-      position: absolute; left: 0; top: -2px; display: flex; align-items: center; justify-content: center;
-      width: 24px; height: 24px; background: rgba(0, 123, 255, 0.15); color: #007bff; border-radius: 50%; font-weight: bold;
-    }
-
-    /* --- GÖRSEL ALANI (KESİLME/TAŞMA SORUNU ÇÖZÜLDÜ) --- */
-    .visual-area { 
-      flex: 1; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      position: relative; 
-      height: 100%;
-    }
-    
-    .visual-area img {
-      width: 100%; 
-      max-width: 600px; 
-      height: 100%;
-      max-height: 65vh; /* Ekrana sığması için kısıtlama */
-      border-radius: 20px; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
-      object-fit: contain; /* COVER YERİNE CONTAIN: Resmi kesinlikle kırpmaz, içine sığdırır */
-      background: #ffffff; /* Sığdırırken arkada kalan boşlukları beyaz yapar */
-      padding: 20px; /* Cihazın çerçeveye yapışmasını engeller */
-    }
-    
-    .visual-area.large-intro img { max-width: 800px; max-height: 75vh; }
-
-    .comparison-area { display: flex; gap: 20px; width: 100%; justify-content: center; align-items: center; }
-    .comparison-area img { 
-      width: 48%; 
-      height: 40vh; /* İki resim yan yanayken aynı boyda olsun */
-      border-radius: 16px; 
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
-      object-fit: contain; 
-      background: #ffffff;
-      padding: 15px;
-    }
-
-    /* --- TEKNİK BÖLÜM --- */
-    .technical-section .slide-container { flex-direction: column; }
-    .technical-section .content-card { max-width: 1000px; border-top-color: #dc3545; } 
-    .technical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 20px; }
-    .tech-box h3 { font-size: 1.4rem; margin-bottom: 15px; color: #dc3545; }
-    .tech-box.positive h3 { color: #007bff; } 
-    .tech-box ul li { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: #4b5563; list-style:none; }
-
-    /* --- İLETİŞİM BÖLÜMÜ (SON SAYFA DİKEY RESİM AYARI) --- */
-    .contact-section .content-card { max-width: 1100px; }
-    .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
-    
-    .video-wrapper { 
-      background: #fff; 
-      border-radius: 20px; 
-      overflow: hidden; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      max-height: 70vh; /* İletişim sayfasının boyunu uzatıp ekran dışına taşırmasını engeller */
-    }
-    
-    .video-wrapper img { 
-      width: 100%; 
-      height: 100%;
-      max-height: 70vh;
-      object-fit: contain; /* Uzun dik resimleri kırpmaz */
-      display: block; 
-      padding: 15px;
-    }
-    
-    .contact-info-box h3 { font-size: 1.8rem; color: #1a3c5e; margin-bottom: 25px; }
-    .info-item { margin-bottom: 20px; font-size: 1.2rem; color: #374151; background: rgba(255,255,255,0.7); padding: 15px; border-radius: 12px; border: 1px solid #eee;}
-    .info-item strong { color: #007bff; display: block; margin-bottom: 5px;}
-    
-    .qr-container { text-align: center; margin-top: 20px; background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .qr-container img { width: 130px; height: 130px; border-radius: 12px; margin-bottom: 15px; }
-    .qr-text { font-weight: 700; color: #E1306C; font-size: 1.2rem; }
-    .qr-sub { font-size: 0.9rem; color: #6b7280;}
-
-    /* --- SLAYT GÖSTERGESİ --- */
-    .slide-indicator {
-      position: fixed;
-      bottom: 25px;
-      right: 30px;
-      background: #007bff; 
-      color: white;
-      padding: 10px 18px;
-      border-radius: 30px;
-      font-weight: 600;
-      z-index: 9999;
-      font-family: 'Montserrat', sans-serif;
-      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="logo-container">
-    <img src="logo.jpg" alt="Focus Medikal Logo">
-  </div>
-
-  <div id="presentation-container">
-    
-    <!-- SLAYT 1 -->
-    <section class="slide-section active">
-      <div class="slide-container">
-        <div class="content-card">
-          <h2>Yeni Nesil EMS Teknolojisi</h2>
-          <p>Kas çalıştırma ve vücut şekillendirmede devrim yaratan yeni nesil teknoloji ile tanışın.</p>
-          <ul class="feature-list">
-            <li>Yağ yakımı ve kas şekillendirme bir arada.</li>
-            <li>Ameliyatsız ve ağrısız uygulama.</li>
-            <li>Kısa sürede yüksek performans.</li>
-            <li>Focus Medikal güvencesiyle.</li>
-          </ul>
-        </div>
-        <div class="visual-area large-intro"> 
-          <img src="8.jpg" alt="EMS Cihazı">
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 2 -->
-    <section class="slide-section">
-      <div class="slide-container">
-        <div class="visual-area">
-          <img src="5.jpg" alt="EMS Çalışma Prensibi">
-        </div>
-        <div class="content-card">
-          <h2>EMS Nedir ve Nasıl Çalışır?</h2>
-          <ul class="feature-list">
-            <li>Sinir-kas iletişimini birebir taklit eder.</li>
-            <li>Kaslar ritmik olarak kasılır ve gevşer.</li>
-            <li>Derin kas gruplarını harekete geçirir.</li>
-            <li>Kas gücü ve sıkılığını maksimum seviyeye çıkarır.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 3 -->
-    <section class="slide-section">
-      <div class="slide-container">
-        <div class="content-card">
-          <h2>30 Dakikada 25.000 Mekik Etkisi</h2>
-          <ul class="feature-list">
-            <li>Sadece 30 dakikada 25.000 mekik/squat etkisi.</li>
-            <li>Kısa sürede yoğun ve derin kas çalışması.</li>
-            <li>Normal egzersizin çok üzerinde etki.</li>
-            <li>Zaman kazandırır, eforu minimize eder.</li>
-          </ul>
-        </div>
-        <div class="visual-area">
-          <img src="4.jpg" alt="Fitness Etkisi">
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 4 -->
-    <section class="slide-section">
-      <div class="slide-container">
-        <div class="visual-area comparison-area">
-          <img src="6.jpg" alt="Karın Uygulaması">
-          <img src="7.jpg" alt="Basen Uygulaması">
-        </div>
-        <div class="content-card">
-          <h2>EMS + RF Teknolojisi ve Uygulama Alanları</h2>
-          <ul class="feature-list">
-            <li><strong>Karın:</strong> Kasları belirginleştirir, yağları eritir.</li>
-            <li><strong>Basen:</strong> Kaldırma (lift) etkisi yaratır.</li>
-            <li><strong>Bacak ve Kol:</strong> Sıkılaşma ve incelme sağlar.</li>
-            <li><strong>Bel:</strong> İncelme ve form kazandırır.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 5 -->
-    <section class="slide-section">
-      <div class="slide-container">
-        <div class="content-card">
-          <h2>Konforlu ve Ağrısız Uygulama</h2>
-          <ul class="feature-list">
-            <li>Tamamen ağrısızdır, anestezi gerektirmez.</li>
-            <li>İğnesiz ve ameliyatsızdır.</li>
-            <li>Enerji seviyesi kişiye göre ayarlanabilir.</li>
-            <li>İşlem sonrası günlük hayata hemen dönüş.</li>
-          </ul>
-        </div>
-        <div class="visual-area">
-          <img src="2.jpg" alt="Klinik Uygulama">
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 6 -->
-    <section class="slide-section technical-section">
-      <div class="slide-container">
-        <div class="content-card">
-          <h2>Teknik Kapasite ve Kullanım</h2>
-          <div class="technical-grid">
-            <div class="tech-box">
-              <h3>⚡ Cihaz Gücü</h3>
-              <ul>
-                <li><strong>13 Tesla:</strong> Güçlü derin kas uyarımı.</li>
-                <li><strong>3500 Watt:</strong> Dengeli ve stabil enerji çıkışı.</li>
-                <li>Kesintisiz performans ve dayanıklılık.</li>
-              </ul>
-            </div>
-
-            <div class="tech-box positive">
-              <h3>👥 Kimler İçin Uygun?</h3>
-              <ul>
-                <li>Bölgesel yağlanma sorunu olanlar.</li>
-                <li>Kas gücü zayıf kişiler.</li>
-                <li>Sıkılaşma ve vücut şekillendirme isteyenler.</li>
-                <li>Spor yapmaya vakti olmayanlar.</li>
-              </ul>
-            </div>
-
-             <div class="tech-box positive">
-              <h3>🏥 Profesyonel Standart</h3>
-              <ul>
-                <li>Güzellik merkezleri ve klinikler için ideal.</li>
-                <li>Güvenli kullanım protokolleri.</li>
-                <li>Müşteri memnuniyeti odaklı sonuçlar.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 7 -->
-    <section class="slide-section">
-      <div class="slide-container" style="justify-content: center;">
-        <div class="visual-area large-intro">
-          <img src="9.jpg" alt="Yeni Nesil EMS Özeti">
-        </div>
-      </div>
-    </section>
-
-    <!-- SLAYT 8 -->
-    <section class="slide-section contact-section">
-      <div class="slide-container">
-        <div class="content-card">
-          <h2>İletişim</h2>
-          <div class="contact-grid">
-            
-            <div class="video-wrapper">
-              <img src="1.jpg" alt="Focus Medikal EMS">
-            </div>
-
-            <div class="contact-info-box">
-              <h3>Bize Ulaşın</h3>
-             
-              <div class="info-item" style="font-weight: bold; color: #1a3c5e; border: none; background: transparent; padding-bottom: 0;">
-                 NURHAYAT ÇAYIRGAN
-              </div>
-
-              <div class="info-item">
-                <strong>Telefon:</strong>
-                +90 552 605 48 55
-              </div>
- 
-              <div class="info-item">
-                <strong>Klinik Adresi:</strong>
-                Focus Medikal<br>
-                Gaziantep / Şehitkamil 
-              </div>
-
-              <div class="qr-container">
-                <img src="instagram_qr.jpg" alt="Instagram QR Kodu">
-                <div class="qr-text">@focusmedikal</div>
-                <div class="qr-sub">Bizi takip etmeyi unutmayınız</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <div class="slide-indicator" id="slideIndicator">1 / 8</div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const slides = document.querySelectorAll(".slide-section");
-      const indicator = document.getElementById("slideIndicator");
-      let currentSlide = 0;
-
-      function showSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= slides.length) index = slides.length - 1;
-
-        slides.forEach(slide => slide.classList.remove("active"));
-        
-        currentSlide = index;
-        slides[currentSlide].classList.add("active");
-
-        indicator.innerText = (currentSlide + 1) + " / " + slides.length;
-      }
-
-      document.addEventListener("keydown", function(event) {
-        if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
-          event.preventDefault(); 
-          showSlide(currentSlide + 1);
-        }
-        else if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "PageUp" || event.key === "Backspace") {
-          event.preventDefault();
-          showSlide(currentSlide - 1);
-        }
-      });
-
-      document.addEventListener("click", function(event) {
-        const clickX = event.clientX;
-        const screenWidth = window.innerWidth;
-        
-        if (clickX > screenWidth / 2) {
-          showSlide(currentSlide + 1);
-        } else {
-          showSlide(currentSlide - 1); 
-        }
-      });
-    });
-  </script>
-
-</body>
-</html>
-Citation Sources
-https://github.com/byron62100/coursprot 
-tamam çok iyi ancak mobilde ikiside rezalet gözüküyor
-
-Thought for 27 seconds
-Haklısınız, masaüstü (tam ekran) sunum mantığına geçtiğimizde mobildeki görünümü hesaba katmadığımız için içerikler iç içe girip taşmalar yaşandı.
-
-Mobildeki "rezalet" görünümün 3 temel sebebi vardı:
-
-İçerik Sığmaması: Mobilde ekranlar dik (dikey) olduğu için yan yana (resim ve yazı) duramazlar. Alt alta geçmeleri gerekir.
-Ekranın Kaymaması: Masaüstünde tam sayfa geçişi olsun diye sayfanın aşağı kaymasını (overflow: hidden) engellemiştik. Ancak mobilde yazı uzunsa aşağı kaydırıp okumak gerekir.
-Dokunma Hatası: Mobilde okumak için ekrana dokunduğunuzda, kodumuz bunu "Tıklandı, diğer slayta geç" olarak algılayıp sunumu atlıyordu.
-Neler Yaptım?
-Mobil Uyumluluk (Responsive) Eklendi: Ekran telefondan açıldığında sistem otomatik olarak resimleri üste, yazıları alta alacak şekilde kendini dikey formata sokar.
-Kaydırma Özelliği: Yazılar uzunsa, slayt kendi içinde aşağı doğru kaydırılabilir oldu.
-Tıklama İptal, "Kaydırma (Swipe)" Eklendi: Mobilde yanlışlıkla diğer sayfaya geçmeyin diye tıklama geçişi iptal edildi. Instagram hikayelerindeki gibi parmağınızla ekranı sola/sağa kaydırarak (Swipe) slayt değiştirebilirsiniz.
-Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir görünüm elde edeceksiniz:
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Focus Medikal - Yeni Nesil EMS Teknolojisi</title>
-  <style>
-    /* --- GENEL AYARLAR VE TİPOGRAFİ --- */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background: radial-gradient(circle at 50% 50%, #f4f7f9 0%, #d9e2ec 100%);
-      color: #333;
-      line-height: 1.7;
-      overflow: hidden; /* Ana gövde kaymaz, slaytlar kendi içinde kayar */
+      overflow: hidden; /* KESİNLİKLE KAYMA OLMAYACAK */
     }
 
     h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
@@ -570,7 +102,7 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
       text-align: justify;
     }
 
-    .feature-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .feature-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
     .feature-list li {
       list-style: none;
       position: relative;
@@ -637,53 +169,100 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
       box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
     }
 
-    /* ========================================= */
-    /* 📱 MOBİL UYUMLULUK (TELEFON VE TABLETLER) */
-    /* ========================================= */
+    /* ============================================================== */
+    /* 📱 SIFIR KAYDIRMALI (NO-SCROLL) TAM EKRAN MOBİL UYUMLULUK      */
+    /* ============================================================== */
     @media (max-width: 900px) {
-      /* Logo Küçültme */
-      .logo-container { top: 15px; left: 15px; }
-      .logo-container img { height: 60px; }
+      /* Logoyu Minyatürleştir ve Üste Al */
+      .logo-container { top: 10px; left: 10px; }
+      .logo-container img { height: 40px; }
 
-      /* Slaytın kendi içinde kaymasına izin ver */
+      /* Sayfayı Kesinlikle Kitle - Taşma Yasak */
       .slide-section {
-        padding: 90px 5% 70px; /* Üstte logoya, altta sayaca yer bırak */
-        align-items: flex-start; /* İçerik yukarıdan başlasın */
-        overflow-y: auto; /* Yazı uzunsa KENDİ İÇİNDE kaydırılabilsin */
-        overflow-x: hidden;
+        padding: 50px 3% 30px; /* Üst logo, alt sayaç boşluğu */
+        align-items: center; 
+        justify-content: center;
+        overflow: hidden !important; 
       }
 
-      /* Yanyana duran içerikleri alt alta diz */
+      /* İçerik Sıralamasını Alt Alta Al ama Kompakt Yap */
       .slide-container {
         flex-direction: column !important; 
-        gap: 20px;
+        gap: 8px; /* Boşluklar minimum */
+        height: 100%;
+        justify-content: center;
       }
 
-      /* ÖNCE RESİM, SONRA YAZI GÖSTER (Sıralamayı düzeltir) */
-      .visual-area { order: 1; width: 100%; height: auto; margin-bottom: 10px; }
-      .content-card { order: 2; width: 100%; max-width: 100%; padding: 1.5rem; border-top: none; border-left: 5px solid #007bff; }
-
-      /* Resim boyutlarını ekrana sığacak şekilde optimize et */
+      /* Resim Alanını Daralt */
+      .visual-area { order: 1; height: auto; max-height: 30vh; margin-bottom: 0; }
       .visual-area img, .visual-area.large-intro img {
-        max-height: 40vh; /* Resim ekranın %40'ından fazlasını kaplamasın */
-        padding: 10px;
+        max-height: 28vh; /* Resim ekranın en fazla %28'ini kaplasın */
+        padding: 5px;
       }
 
-      /* Karşılaştırma (Yan yana olan resimleri alt alta al) */
-      .comparison-area { flex-direction: column; }
-      .comparison-area img { width: 100%; max-height: 30vh; }
+      /* Yan Yana Karşılaştırma Resimleri */
+      .comparison-area { flex-direction: row; gap: 10px; }
+      .comparison-area img { width: 48%; max-height: 20vh; padding: 5px; }
 
-      /* İletişim Formu ve Teknik Sayfa */
-      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-      .video-wrapper, .video-wrapper img { max-height: 40vh; }
-      .technical-grid { grid-template-columns: 1fr; gap: 20px; }
+      /* İçerik Kartını Sıkıştır */
+      .content-card { 
+        order: 2; 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 1rem; /* İç boşlukları daralttık */
+        border-top: none; 
+        border-left: 5px solid #007bff; 
+        margin-bottom: 0;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
 
-      /* Başlık ve metin boyutlarını telefona uygun yap */
-      .content-card h2 { font-size: 1.8rem; margin-bottom: 0.8rem; }
-      .content-card p, .feature-list li { font-size: 1rem; }
+      /* Başlık ve Metin Boyutlarını Ufalt */
+      .content-card h2 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+      .content-card p { font-size: 0.8rem; margin-bottom: 0.3rem; line-height: 1.3; }
+      
+      /* Listeleri Mobilde 2 Kolon Yap (Yükseklikten Kurtarmak İçin) */
+      .feature-list { margin-top: 5px; gap: 4px; grid-template-columns: 1fr 1fr; }
+      .feature-list li { font-size: 0.75rem; padding-left: 20px; line-height: 1.2; }
+      .feature-list li::before { width: 14px; height: 14px; font-size: 0.65rem; top: 1px; }
 
-      /* Slayt Sayacı Boyutu */
-      .slide-indicator { bottom: 15px; right: 15px; padding: 6px 12px; font-size: 0.9rem; }
+      /* Teknik Sayfa (Slayt 6) Kompakt Tasarım */
+      .technical-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px; margin-top: 5px; }
+      .tech-box { width: 48%; }
+      .tech-box:last-child { width: 100%; text-align: center; } /* 3.kutu alta tam boy ortalansın */
+      .tech-box:last-child ul li { text-align: left; }
+      .tech-box h3 { font-size: 0.85rem; margin-bottom: 3px; }
+      .tech-box ul li { font-size: 0.7rem; margin-bottom: 2px; padding-left: 10px; }
+
+      /* İletişim Sayfası (Slayt 8) Mobilde Yanyana! */
+      /* Alt alta sığmayacağı için telefonu yan çevirmişiz gibi yanyana diziyoruz */
+      .contact-grid { 
+        display: flex; 
+        flex-direction: row; 
+        gap: 10px; 
+        align-items: stretch; 
+      }
+      .video-wrapper { width: 40%; max-height: 40vh; }
+      .video-wrapper img { padding: 5px; }
+      
+      .contact-info-box { width: 60%; display: flex; flex-direction: column; justify-content: center;}
+      .contact-info-box h3 { font-size: 0.9rem; margin-bottom: 5px; padding-bottom: 3px; }
+      .info-item { font-size: 0.7rem; padding: 4px 6px; margin-bottom: 4px; }
+      .info-item strong { display: inline; margin-right: 5px;}
+      
+      /* QR Kod Alanı Küçültüldü */
+      .qr-container { 
+        margin-top: 0; padding: 5px; 
+        display: flex; align-items: center; gap: 8px; justify-content: flex-start;
+        flex-direction: row;
+        border: none; background: transparent; box-shadow: none;
+      }
+      .qr-container img { width: 45px; height: 45px; margin-bottom: 0; }
+      .qr-text { font-size: 0.75rem; margin:0;}
+      .qr-sub { display: none; /* Mobilde yer kazanmak için alt yazıyı gizle */}
+
+      /* Slayt Sayacı */
+      .slide-indicator { bottom: 10px; right: 10px; padding: 4px 8px; font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -702,7 +281,7 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
           <h2>Yeni Nesil EMS Teknolojisi</h2>
           <p>Kas çalıştırma ve vücut şekillendirmede devrim yaratan yeni nesil teknoloji ile tanışın.</p>
           <ul class="feature-list">
-            <li>Yağ yakımı ve kas şekillendirme bir arada.</li>
+            <li>Yağ yakımı ve kas şekillendirme.</li>
             <li>Ameliyatsız ve ağrısız uygulama.</li>
             <li>Kısa sürede yüksek performans.</li>
             <li>Focus Medikal güvencesiyle.</li>
@@ -723,10 +302,10 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
         <div class="content-card">
           <h2>EMS Nedir ve Nasıl Çalışır?</h2>
           <ul class="feature-list">
-            <li>Sinir-kas iletişimini birebir taklit eder.</li>
-            <li>Kaslar ritmik olarak kasılır ve gevşer.</li>
-            <li>Derin kas gruplarını harekete geçirir.</li>
-            <li>Kas gücü ve sıkılığını maksimum seviyeye çıkarır.</li>
+            <li>Sinir-kas iletişimini taklit eder.</li>
+            <li>Kaslar ritmik olarak kasılır.</li>
+            <li>Derin kas gruplarını uyarır.</li>
+            <li>Güç ve sıkılığı maksimuma çıkarır.</li>
           </ul>
         </div>
       </div>
@@ -738,10 +317,10 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
         <div class="content-card">
           <h2>30 Dakikada 25.000 Mekik Etkisi</h2>
           <ul class="feature-list">
-            <li>Sadece 30 dakikada 25.000 mekik/squat etkisi.</li>
-            <li>Kısa sürede yoğun ve derin kas çalışması.</li>
-            <li>Normal egzersizin çok üzerinde etki.</li>
-            <li>Zaman kazandırır, eforu minimize eder.</li>
+            <li>30 dakikada 25.000 squat etkisi.</li>
+            <li>Yoğun ve derin kas çalışması.</li>
+            <li>Normal egzersizin üzerinde etki.</li>
+            <li>Zaman kazandırır, eforu azaltır.</li>
           </ul>
         </div>
         <div class="visual-area">
@@ -760,10 +339,10 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
         <div class="content-card">
           <h2>EMS + RF Teknolojisi ve Uygulama Alanları</h2>
           <ul class="feature-list">
-            <li><strong>Karın:</strong> Kasları belirginleştirir, yağları eritir.</li>
-            <li><strong>Basen:</strong> Kaldırma (lift) etkisi yaratır.</li>
-            <li><strong>Bacak ve Kol:</strong> Sıkılaşma ve incelme sağlar.</li>
-            <li><strong>Bel:</strong> İncelme ve form kazandırır.</li>
+            <li><strong>Karın:</strong> Kasları belirginleştirir.</li>
+            <li><strong>Basen:</strong> Kaldırma (lift) etkisi.</li>
+            <li><strong>Bacak/Kol:</strong> İnceltir ve sıkar.</li>
+            <li><strong>Bel:</strong> Form kazandırır.</li>
           </ul>
         </div>
       </div>
@@ -775,10 +354,10 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
         <div class="content-card">
           <h2>Konforlu ve Ağrısız Uygulama</h2>
           <ul class="feature-list">
-            <li>Tamamen ağrısızdır, anestezi gerektirmez.</li>
+            <li>Ağrısızdır, anestezi gerektirmez.</li>
             <li>İğnesiz ve ameliyatsızdır.</li>
-            <li>Enerji seviyesi kişiye göre ayarlanabilir.</li>
-            <li>İşlem sonrası günlük hayata hemen dönüş.</li>
+            <li>Enerji kişiye göre ayarlanır.</li>
+            <li>Günlük hayata hemen dönüş.</li>
           </ul>
         </div>
         <div class="visual-area">
@@ -796,28 +375,25 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
             <div class="tech-box">
               <h3>⚡ Cihaz Gücü</h3>
               <ul>
-                <li><strong>13 Tesla:</strong> Güçlü derin kas uyarımı.</li>
-                <li><strong>3500 Watt:</strong> Dengeli ve stabil enerji çıkışı.</li>
-                <li>Kesintisiz performans ve dayanıklılık.</li>
+                <li><strong>13 Tesla:</strong> Derin uyarım.</li>
+                <li><strong>3500W:</strong> Stabil çıkış.</li>
+                <li>Kesintisiz performans.</li>
               </ul>
             </div>
-
             <div class="tech-box positive">
               <h3>👥 Kimler İçin Uygun?</h3>
               <ul>
-                <li>Bölgesel yağlanma sorunu olanlar.</li>
-                <li>Kas gücü zayıf kişiler.</li>
-                <li>Sıkılaşma ve vücut şekillendirme isteyenler.</li>
-                <li>Spor yapmaya vakti olmayanlar.</li>
+                <li>Bölgesel yağlanması olanlar.</li>
+                <li>Sıkılaşma isteyenler.</li>
+                <li>Vakti olmayanlar.</li>
               </ul>
             </div>
-
              <div class="tech-box positive">
               <h3>🏥 Profesyonel Standart</h3>
               <ul>
-                <li>Güzellik merkezleri ve klinikler için ideal.</li>
-                <li>Güvenli kullanım protokolleri.</li>
-                <li>Müşteri memnuniyeti odaklı sonuçlar.</li>
+                <li>Klinikler için idealdir.</li>
+                <li>Güvenli kullanım.</li>
+                <li>Garantili sonuçlar.</li>
               </ul>
             </div>
           </div>
@@ -834,7 +410,7 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
       </div>
     </section>
 
-    <!-- SLAYT 8 -->
+    <!-- SLAYT 8 (İLETİŞİM) -->
     <section class="slide-section contact-section">
       <div class="slide-container">
         <div class="content-card">
@@ -847,26 +423,21 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
 
             <div class="contact-info-box">
               <h3>Bize Ulaşın</h3>
-             
-              <div class="info-item" style="font-weight: bold; color: #1a3c5e; border: none; background: transparent; padding-bottom: 0;">
+              <div class="info-item" style="font-weight: bold; color: #1a3c5e; border: none; background: transparent; padding: 0;">
                  NURHAYAT ÇAYIRGAN
               </div>
-
               <div class="info-item">
-                <strong>Telefon:</strong>
-                +90 552 605 48 55
+                <strong>Telefon:</strong> +90 552 605 48 55
               </div>
- 
               <div class="info-item">
-                <strong>Klinik Adresi:</strong>
-                Focus Medikal<br>
-                Gaziantep / Şehitkamil 
+                <strong>Adres:</strong> Focus Medikal, Gaziantep
               </div>
-
               <div class="qr-container">
                 <img src="instagram_qr.jpg" alt="Instagram QR Kodu">
-                <div class="qr-text">@focusmedikal</div>
-                <div class="qr-sub">Bizi takip etmeyi unutmayınız</div>
+                <div>
+                  <p class="qr-text">@focusmedikal</p>
+                  <p class="qr-sub">Bizi takip edin</p>
+                </div>
               </div>
             </div>
 
@@ -889,9 +460,6 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
         if (index < 0) index = 0;
         if (index >= slides.length) index = slides.length - 1;
 
-        // Geçiş esnasında mobilde kaydırılan sayfayı en başa (yukarı) sar
-        slides[currentSlide].scrollTo(0, 0);
-
         slides.forEach(slide => slide.classList.remove("active"));
         currentSlide = index;
         slides[currentSlide].classList.add("active");
@@ -913,7 +481,7 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
 
       // --- TIKLAMA (SADECE BİLGİSAYAR İÇİN) ---
       document.addEventListener("click", function(event) {
-        if (window.innerWidth <= 900) return; // Mobilde tıklamayı yoksay (sayfayı rahatça kaydırabilmek için)
+        if (window.innerWidth <= 900) return; // Mobilde tıklamayı yoksay
         
         const clickX = event.clientX;
         if (clickX > window.innerWidth / 2) showSlide(currentSlide + 1);
@@ -934,9 +502,9 @@ Aşağıdaki kodu kopyalayıp dosyanıza yapıştırın. Mobilde mükemmel bir g
       }, {passive: true});
       
       function handleSwipe() {
-        const swipeThreshold = 50; // Geçiş için minimum kaydırma mesafesi
-        if (touchendX < touchstartX - swipeThreshold) showSlide(currentSlide + 1); // Sola Kaydır = İleri
-        if (touchendX > touchstartX + swipeThreshold) showSlide(currentSlide - 1); // Sağa Kaydır = Geri
+        const swipeThreshold = 50; 
+        if (touchendX < touchstartX - swipeThreshold) showSlide(currentSlide + 1); 
+        if (touchendX > touchstartX + swipeThreshold) showSlide(currentSlide - 1); 
       }
       
     });
